@@ -70,7 +70,8 @@ echo "Installing mergerfs..."
     dpkg -x "$HOME"/.mergerfs-tmp/mergerfs.deb "$HOME"/.mergerfs-tmp
     mv "$HOME"/.mergerfs-tmp/usr/bin/* "$HOME"/bin
     command -v mergerfs
-    mergerfs -v
+    mergerfs -V
+    sleep 3
 
 clear
 
@@ -78,14 +79,15 @@ echo "Have you configured your rclone remote?"
 read -p "Type yes or no: " rconfig
 if [ "$rconfig" = "yes" ]
 then
+    echo ""
     echo "Name of remote? Type below and press Enter."
     echo "Make sure it's the correct remote name or setup will fail."
     read -r remotename
     sleep 2
         if grep -q -E "\[$remotename\]|type = drive" "$HOME"/.config/rclone/rclone.conf; then
+            echo ""
             echo "Your remote name is $remotename."
             echo "This will be appended to your rclone mount service files."
-            echo ""
             sleep 2
         else
             echo ""
@@ -96,11 +98,14 @@ elif [ "$rconfig" = "no" ]
 then
     clear
     echo "Please set your rclone config first. Refer to the following sites."
+    echo "Take note that this script only supports Google Drive."
     echo "==================================================================================="
     echo "https://rclone.org/commands/rclone_config/"
     echo "https://docs.usbx.me/books/rclone/page/configuring-oauth-for-google-drive"
     echo "https://docs.usbx.me/books/rclone/page/installation-configuration-usage-of-rclone"
     echo "==================================================================================="
+    echo "Take note that this script only supports Google Drive."
+    echo "Should you use any other remote, please refer to the manual installation of rclone-mergerfs guide."
     echo "Script will now exit."
     exit
 fi
@@ -196,6 +201,7 @@ echo "Checking if rclone/mergerfs mounts are working..."
         echo "Run the script again."
         exit
     fi
+    clear
     echo "MergerFS Test 2 Starting..."
     rclone move "$HOME"/Stuff/Local/test "$remotename": -vvv
     echo "Waiting for 60 seconds..."
@@ -275,6 +281,7 @@ cd "$HOME" || exit
 source "$HOME"/.bash_aliases
 
 # Quick man for vfs aliases
+echo ""
 echo "This script has installed the following aliases to manage your rclone vfs."
 echo "Just type the following commands in your shell"
 echo ""
