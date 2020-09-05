@@ -77,24 +77,31 @@ echo "Have you configured your rclone remote?"
 read -p "Type yes or no: " rconfig
 if [ "$rconfig" = "yes" ]
 then
-    sleep 3
+    echo "Name of remote? Type below and press Enter."
+    echo "Make sure it's the correct remote name or setup will fail."
+    read -r remotename
+    sleep 2
+        if grep -q -E "\[$remotename\]|type = drive" "$HOME"/.config/rclone/rclone.conf; then
+            echo "Your remote name is $remotename."
+            echo "This will be appended to your rclone mount service files."
+            echo ""
+            sleep 2
+        else
+            echo ""
+            echo "Remote not found. Please run the script again."
+            exit
+        fi
 elif [ "$rconfig" = "no" ]
 then
-    echo "Please set up your rclone config now. During this time, rclone config will be executed."
-    echo ""
-    echo "Please setup/check your remotes before continuing."
-    echo ""
-    echo "Refer to the following sites for help on this."
-    echo "=========================================================================="
+    clear
+    echo "Please set your rclone config first. Refer to the following sites."
+    echo "==================================================================================="
     echo "https://rclone.org/commands/rclone_config/"
     echo "https://docs.usbx.me/books/rclone/page/configuring-oauth-for-google-drive"
-    echo "==========================================================================="
-    echo ""
-    echo "Also take note of your remote name."
-    sleep 5
-    clear
-    rclone config
-    wait
+    echo "https://docs.usbx.me/books/rclone/page/installation-configuration-usage-of-rclone"
+    echo "==================================================================================="
+    echo "Script will now exit."
+    exit
 fi
 
 echo "Name of remote? Type below and press Enter."
@@ -102,7 +109,6 @@ echo "Make sure it's the correct remote name or setup will fail."
 read -r remotename
 sleep 2
 if grep -q -E "\[$remotename\]" "$HOME"/.config/rclone/rclone.conf; then
-    echo ""
     echo "Your remote name is $remotename."
     echo "This will be appended to your rclone mount service files."
     echo ""
@@ -184,7 +190,7 @@ echo "Checking if rclone/mergerfs mounts are working..."
         if rclone lsd "$remotename": | grep "Failed"; then
             echo "Mount successful but it's empty. Setup will continue..."
         else
-            echo "Configuration error. You may have entered your remote name incorrectly or you forgot to set your rclone config."
+            echo "Rclone configuration error."
             echo "Run this script again to set it up."
             exit
         fi
@@ -283,7 +289,7 @@ cd "$HOME" || exit
 source "$HOME"/.bash_aliases
 
 # Quick man for vfs aliases
-echo "This script has installed the following aliases to manage your rclone vfs cache, which is useful when your mount does not have the latest changes from your remote."
+echo "This script has installed the following aliases to manage your rclone vfs."
 echo "Just type the following commands in your shell"
 echo ""
 echo "vfs-start = This starts the vfs mount."
