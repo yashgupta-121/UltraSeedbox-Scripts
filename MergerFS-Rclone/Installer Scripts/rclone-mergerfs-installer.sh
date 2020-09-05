@@ -300,4 +300,5 @@ echo "vfs-uploader-start = This starts the uploader service and upload the conte
 echo "vfs-uploader-stop = This stops the uploader service."
 echo "vfs-uploader-disable = This stops the uploader and disables it from automatically from automatically starting when the server reboots."
 
+rm -- "$0"
 exit
