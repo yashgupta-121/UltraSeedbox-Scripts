@@ -14,7 +14,7 @@ fi
 clear
 
 # Variables
-quota=$(bc -l <<< "$(quota | grep "/" | awk {'print $3'})*1000*.05")
+quota=$(bc -l <<< "$(quota | grep "/" | awk {'print $3'})*1000*.02")
 ze=$(numfmt --to=iec-i "$quota" | cut -b -3)
 
 echo "Creating necessary folders..."
