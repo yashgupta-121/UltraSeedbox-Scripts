@@ -22,6 +22,7 @@ echo "Creating necessary folders..."
     mkdir -p "$HOME"/Stuff/Local
     mkdir -p "$HOME"/Stuff/Mount
     mkdir -p "$HOME"/MergerFS
+    mkdir -p "$HOME"/scripts
     mkdir -p "$HOME"/.config/systemd/user
     mkdir -p "$HOME"/.rclone-tmp
     mkdir -p "$HOME"/.mergerfs-tmp
