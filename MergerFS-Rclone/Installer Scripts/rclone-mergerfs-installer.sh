@@ -105,21 +105,6 @@ then
     exit
 fi
 
-echo "Name of remote? Type below and press Enter."
-echo "Make sure it's the correct remote name or setup will fail."
-read -r remotename
-sleep 2
-if grep -q -E "\[$remotename\]" "$HOME"/.config/rclone/rclone.conf; then
-    echo "Your remote name is $remotename."
-    echo "This will be appended to your rclone mount service files."
-    echo ""
-    sleep 2
-else
-    echo ""
-    echo "Remote not found. Please run the script again."
-    exit
-fi
-
 clear
 
 echo "Done. Downloading service files..."
