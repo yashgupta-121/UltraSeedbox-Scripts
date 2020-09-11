@@ -2,7 +2,7 @@
 Description=Run Rclone Upload daily
 
 [Timer]
-OnCalendar=daily
+OnCalendar=dateset
 RandomizedDelaySec=30m
 Persistent=true
 
