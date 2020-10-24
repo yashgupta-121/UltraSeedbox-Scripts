@@ -13,6 +13,11 @@ then
     exit
 fi
 
+clear
+echo "Do you want to start your applications after backing up?"
+read -rp "Type yes or no: " input2
+
+
 # Prerequisites
 clear
 echo "Creating necessary folders..."
@@ -32,7 +37,9 @@ then
     echo "Backing up Airsonic..."
     app-airsonic stop
     tar -cvf "$HOME"/backup/apps/airsonic.tar .config/airsonic/ .apps/airsonic/
-    app-airsonic start
+    if [ "$input2" = "yes" ]; then
+        app-airsonic start
+    fi
     echo "Airsonic" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -41,7 +48,9 @@ then
     echo "Backing up autodl..."
     app-autodl-irssi stop
     tar -cvf "$HOME"/backup/apps/autodl-irssi.tar .autodl/
-    app-autodl-irssi start
+    if [ "$input2" = "yes" ]; then
+        app-autodl-irssi start
+    fi
     echo "AutoDL-irssi" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -50,7 +59,9 @@ then
     echo "Backing up Bazarr..."
     app-bazarr stop
     tar -cvf "$HOME"/backup/apps/bazarr.tar .apps/bazarr/
-    app-bazarr start
+    if [ "$input2" = "yes" ]; then
+        app-bazarr start
+    fi
     echo "Bazarr" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -59,7 +70,9 @@ then
     echo "Backing up Resilio Sync..."
     app-btsync stop
     tar -cvf "$HOME"/backup/apps/btsync.tar .apps/btsync/
-    app-btsync start
+    if [ "$input2" = "yes" ]; then
+        app-btsync start
+    fi
     echo "Resilio Sync" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -68,7 +81,9 @@ then
     echo "Backing up CouchPotato..."
     app-couchpotato stop
     tar -cvf "$HOME"/backup/apps/couchpotato.tar .apps/couchpotato/
-    app-couchpotato start
+    if [ "$input2" = "yes" ]; then
+        app-couchpotato start
+    fi
     echo "CouchPotato" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -77,7 +92,9 @@ then
     echo "Backing up Deluge..."
     app-deluge stop
     tar -cvf "$HOME"/backup/apps/deluge.tar .config/deluge/
-    app-deluge start
+    if [ "$input2" = "yes" ]; then
+        app-deluge start
+    fi
     echo "Deluge" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -86,7 +103,9 @@ then
     echo "Backing up Emby..."
     app-emby stop
     tar -cvf "$HOME"/backup/apps/emby.tar .apps/emby/
-    app-emby start
+    if [ "$input2" = "yes" ]; then
+        app-emby start
+    fi
     echo "Emby" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -95,7 +114,9 @@ then
     echo "Backing up Jackett..."
     app-jackett stop
     tar -cvf "$HOME"/backup/apps/jackett.tar .apps/jackett/
-    app-jackett start
+    if [ "$input2" = "yes" ]; then
+        app-jackett start
+    fi
     echo "Jackett" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -104,7 +125,9 @@ then
     echo "Backing up JDownloader2..."
     app-jdownloader2 stop
     tar -cvf "$HOME"/backup/apps/jdownloader2.tar .config/jdownloader2/
-    app-jdownloader2 start
+    if [ "$input2" = "yes" ]; then
+        app-jdownloader2 start
+    fi
     echo "JDownloader2" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -113,7 +136,9 @@ then
     echo "Backing up Jellyfin..."
     app-jellyfin stop
     tar -cvf "$HOME"/backup/apps/jellyfin.tar .apps/jellyfin/
-    app-jellyfin start
+    if [ "$input2" = "yes" ]; then
+        app-jellyfin start
+    fi
     echo "Jellyfin" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -122,7 +147,9 @@ then
     echo "Backing up LazyLibrarian..."
     app-lazylibrarian stop
     tar -cvf "$HOME"/backup/apps/lazylibrarian.tar .config/lazylibrarian/
-    app-lazylibrarian start
+    if [ "$input2" = "yes" ]; then
+        app-lazylibrarian start
+    fi
     echo "LazyLibrarian" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -131,7 +158,9 @@ then
     echo "Backing up Lidarr..."
     app-lidarr stop
     tar -cvf "$HOME"/backup/apps/lidarr.tar .config/lidarr/
-    app-lidarr start
+    if [ "$input2" = "yes" ]; then
+        app-lidarr start
+    fi
     echo "Lidarr" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -140,7 +169,9 @@ then
     echo "Backing up Medusa..."
     app-medusa stop
     tar -cvf "$HOME"/backup/apps/medusa.tar .apps/medusa/
-    app-medusa start
+    if [ "$input2" = "yes" ]; then
+        app-medusa start
+    fi
     echo "Medusa" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -149,7 +180,9 @@ then
     echo "Backing up Mylar..."
     app-mylar stop
     tar -cvf "$HOME"/backup/apps/mylar.tar .apps/mylar/ .config/mylar/
-    app-mylar start
+    if [ "$input2" = "yes" ]; then
+        app-mylar start
+    fi
     echo "Mylar" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -158,14 +191,18 @@ then
     echo "Backing up nzbget..."
     app-nzbget stop
     tar -cvf "$HOME"/backup/apps/nzbget.tar .config/nzbget/
-    app-nzbget start
+    if [ "$input2" = "yes" ]; then
+        app-nzbget start
+    fi
     echo "NZBGet" >>  "$HOME"/backup/backup-list.txt
 elif [ -n "$(ls -A "$HOME"/.apps/nzbget 2>/dev/null)" ];
 then
     echo "Backing up nzbget..."
     app-nzbget stop
     tar -cvf "$HOME"/backup/apps/nzbget.tar .apps/nzbget/
-    app-nzbget start
+    if [ "$input2" = "yes" ]; then
+        app-nzbget start
+    fi
     echo "NZBGet" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -174,7 +211,9 @@ then
     echo "Backing up NZBHydra2..."
     app-nzbhydra2 stop
     tar -cvf "$HOME"/backup/apps/nzbhydra2.tar .config/nzbhydra2/
-    app-nzbhydra2 start
+    if [ "$input2" = "yes" ]; then
+        app-nzbhydra2 start
+    fi
     echo "NZBHydra2" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -183,7 +222,9 @@ then
     echo "Backing up Ombi..."
     app-ombi stop
     tar -cvf "$HOME"/backup/apps/ombi.tar .config/ombi/
-    app-ombi start
+    if [ "$input2" = "yes" ]; then
+        app-ombi start
+    fi
     echo "Ombi" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -192,7 +233,9 @@ then
     echo "Backing up Plex..."
     app-plex stop
     tar -cvf "$HOME"/backup/apps/plex.tar .config/plex/
-    app-plex start
+    if [ "$input2" = "yes" ]; then
+        app-plex start
+    fi
     echo "Plex" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -201,7 +244,9 @@ then
     echo "Backing up Radarr..."
     app-radarr stop
     tar -cvf "$HOME"/backup/apps/radarr.tar .apps/radarr/
-    app-radarr start
+    if [ "$input2" = "yes" ]; then
+        app-radarr start
+    fi
     echo "Radarr" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -210,7 +255,9 @@ then
     echo "Backing up rTorrent & ruTorrent..."
     app-rtorrent stop
     tar -cvf "$HOME"/backup/apps/rtorrent.rar .config/rtorrent/
-    app-rtorrent start
+    if [ "$input2" = "yes" ]; then
+        app-rtorrent start
+    fi
     echo "rTorrent" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -219,7 +266,9 @@ then
     echo "Backing up SABnzbd..."
     app-sabnzbd stop
     tar -cvf "$HOME"/backup/apps/sabnzbd.tar .apps/sabnzbd/
-    app-sabnzbd start
+    if [ "$input2" = "yes" ]; then
+        app-sabnzbd start
+    fi
     echo "SABnzbd" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -228,7 +277,9 @@ then
     echo "Backing up SickChill..."
     app-sickchill stop
     tar -cvf "$HOME"/backup/apps/sickchill.tar .apps/sickchill/
-    app-sickchill start
+    if [ "$input2" = "yes" ]; then
+        app-sickchill start
+    fi
     echo "SickChill" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -237,7 +288,9 @@ then
     echo "Backing up Sonarr..."
     app-sonarr stop
     tar -cvf "$HOME"/backup/apps/sonarr.tar .apps/sonarr/
-    app-sonarr start
+    if [ "$input2" = "yes" ]; then
+        app-sonarr start
+    fi
     echo "Sonarr" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -246,7 +299,9 @@ then
     echo "Backing up Syncthing..."
     app-syncthing stop
     tar -cvf "$HOME"/backup/apps/syncthing.tar .apps/syncthing/
-    app-syncthing start
+    if [ "$input2" = "yes" ]; then
+        app-syncthing start
+    fi
     echo "Syncthing" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -255,7 +310,9 @@ then
     echo "Backing up Tautulli..."
     app-tautulli stop
     tar -cvf "$HOME"/backup/apps/tautulli.tar .config/tautulli/
-    app-tautulli start
+    if [ "$input2" = "yes" ]; then
+        app-tautulli start
+    fi
     echo "Tautulli" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -264,7 +321,9 @@ then
     echo "Backing up Transmission..."
     app-transmission stop
     tar -cvf "$HOME"/backup/apps/transmission.tar .apps/transmission/
-    app-transmission start
+    if [ "$input2" = "yes" ]; then
+        app-transmission start
+    fi
     echo "Transmission" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -273,7 +332,9 @@ then
     echo "Backing up Ubooquity..."
     app-ubooquity stop
     tar -cvf "$HOME"/backup/apps/ubooquity.tar .apps/ubooquity/ .config/ubooquity/
-    app-ubooquity start
+    if [ "$input2" = "yes" ]; then
+        app-ubooquity start
+    fi
     echo "Ubooquity" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -282,7 +343,9 @@ then
     echo "Backing up ZNC..."
     app-znc stop
     tar -cvf "$HOME"/backup/apps/znc.tar .apps/znc/
-    app-znc start
+    if [ "$input2" = "yes" ]; then
+        app-znc start
+    fi
     echo "ZNC" >>  "$HOME"/backup/backup-list.txt
 fi
 
@@ -290,7 +353,10 @@ fi
 echo ""
 echo "Please save this folder in a safe location or run the migration script on this slot."
 echo ""
-echo "If you run the migration script, please make sure you have installed the apps listed above on the new slot first."
+echo "If you run the migration script, please make sure you have installed the apps listed above on your new slot first and you stopped all of your running apps on your old slot."
+echo "Please take note that the your old slot's HOME NUMBER AND USERNAME is $PWD"
+echo ""
+echo "Enter this when asked during the restore script."
 } >> "$HOME"/backup/backup-list.txt
 
 clear
