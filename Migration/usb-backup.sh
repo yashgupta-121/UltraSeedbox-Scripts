@@ -13,24 +13,61 @@ then
     exit
 fi
 
-clear
-echo "Do you want to start your applications after backing up?"
-read -rp "Type yes or no: " input2
-
-
 # Prerequisites
 clear
 echo "Creating necessary folders..."
     mkdir -p "$HOME"/backup
     mkdir -p "$HOME"/backup/apps
     mkdir -p "$HOME"/backup/extras
+    mkdir -p "$HOME"/backup/Data
 
 cd "$HOME" || exit
 
+clear
+echo "Do you want to start your applications after backing up?"
+read -rp "Type yes or no: " input2
+
+if [ "$input2" == no ];
+then
+    clear
+    echo "Do you want to move your Torrent Data Files and media folder to the backup folder?"
+    read -rp "Type yes or no: " input3
+fi
+
+if [ "$input3" == yes ];
+then
+if [ -n "$(ls -A "$HOME"/files/ 2>/dev/null)" ];
+    then
+        echo "Moving files..."
+        mkdir -p "$HOME"/backup/Data/files/
+        mv -fv "$HOME"/files/ "$HOME"/backup/Data/files/
+        echo "$HOME/files/" >>  "$HOME"/restore-list.txt
+    fi
+
+    if [ -n "$(ls -A "$HOME"/Downloads/ 2>/dev/null)" ];
+    then
+        echo "Moving Downloads..."
+        mkdir -p "$HOME"/backup/Data/Downloads/
+        mv -fv "$HOME"/Downloads/ "$HOME"/backup/Data/Downloads/
+        echo "$HOME/Downloads/" >>  "$HOME"/restore-list.txt
+    fi
+    
+    if [ -n "$(ls -A "$HOME"/Downloads/ 2>/dev/null)" ];
+    then
+        echo "Moving Downloads..."
+        mkdir -p "$HOME"/backup/Data/Downloads/
+        mv -fv "$HOME"/Downloads/ "$HOME"/backup/Data/Downloads/
+        echo "$HOME/Downloads/" >>  "$HOME"/restore-list.txt
+    fi
+fi
+
 # Backup proper
 clear
-echo "You have backed up the following apps:" > "$HOME"/backup/backup-list.txt
-echo "" >> "$HOME"/backup/backup-list.txt
+{
+echo ""
+echo "You have backed up the following apps:"
+echo ""
+} >> "$HOME"/backup/backup-list.txt
 
 if [ -n "$(ls -A "$HOME"/.config/airsonic 2>/dev/null)" ] && [ -n "$(ls -A "$HOME"/.apps/airsonic 2>/dev/null)" ];
 then
