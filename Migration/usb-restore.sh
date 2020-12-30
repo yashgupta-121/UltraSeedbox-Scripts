@@ -332,7 +332,7 @@ fi
 
 if [ -n "$(ls -A "$HOME"/.apps/ubooquity 2>/dev/null)" ] && [ -n "$(ls -A "$HOME"/.config/ubooquity 2>/dev/null)" ];
 then
-    echo "Backing up Ubooquity..."
+    echo "Restoring Ubooquity..."
     app-ubooquity stop
     tar -cvf "$HOME"/backup/apps/ubooquity .apps/ubooquity/ .config/ubooquity/
     app-ubooquity start
@@ -341,7 +341,7 @@ fi
 
 if [ -n "$(ls -A "$HOME"/.apps/znc 2>/dev/null)" ];
 then
-    echo "Backing up ZNC..."
+    echo "Restoring ZNC..."
     app-znc stop
     tar -cvf "$HOME"/backup/apps/znc .apps/znc/
     app-znc start
