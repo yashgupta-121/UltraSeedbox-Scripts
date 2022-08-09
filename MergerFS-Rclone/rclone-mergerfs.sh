@@ -17,6 +17,8 @@ paths[2]="${HOME}/Stuff/Local/Downloads/torrents"
 paths[3]="${HOME}/Stuff/Local/Downloads/usenet"
 paths[4]="${HOME}/MergerFS"
 paths[5]="${HOME}/scripts"
+paths[6]="${HOME}/Stuff/Local/Movies"
+paths[7]="${HOME}/Stuff/Local/TV Shows"
 
 #Checks
 
@@ -33,7 +35,11 @@ if [ ! -f "${HOME}/bin/mergerfs" ]; then
   exit 1
 fi
 
-rclone selfupdate -q
+if ! rclone selfupdate -q > /dev/null 2>&1; then
+  echo "Self-update failed. Installed rclone version is very old."
+  echo "Install rclone stable, then run the script again. https://docs.usbx.me/link/6#bkmrk-rclone-stable"
+  exit 1
+fi
 
 read -rp "Enter the rclone remote name for your Google Drive: " remote
 echo
@@ -67,7 +73,7 @@ done
 echo
 echo "Rclone-MergerFS workflow setup started.."
 
-for i in {1..5}; do
+for i in {1..7}; do
   if [ ! -d "${paths[${i}]}" ]; then
     mkdir -p "${paths[${i}]}"
   fi
@@ -137,9 +143,6 @@ EOF
 systemctl --user daemon-reload
 systemctl --user enable --now --quiet rclone-vfs.service mergerfs.service
 sleep 5
-
-mkdir -p "${HOME}/MergerFS/Movies"
-mkdir -p "${HOME}/MergerFS/TV Shows"
 
 #Install rclone-upload script
 
@@ -262,7 +265,7 @@ else
       /usr/bin/curl -H "Content-Type: application/json" -d "\$notification_data" \$DISCORD_WEBHOOK_URL 
     }
     
-    if [ "\$transferred_amount" != "0" ]; then
+    if [ "\$transferred_amount" != "0 B" ]; then
       send_notification
     fi
 
